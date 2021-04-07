@@ -1,7 +1,7 @@
-# wab57addagalla
+# db57addagalla
 
-Giridhar Addagalla wab57addagalla
-<https://wab57addagalla.herokuapp.com/>
+Giridhar Addagalla db57addagalla
+<https://db57addagalla.herokuapp.com/>
 
 Class name: Serials
 Attributes:
