@@ -5,6 +5,8 @@ var router = express.Router();
 router.get('/', serial_controlers.serial_view_all_Page );
 /* GET detail serial page */
 router.get('/detail', serial_controlers.serial_view_one_Page);
+/* GET create serial page */
+router.get('/create', serial_controlers.serial_create_Page);
 
 
 module.exports = router; 
