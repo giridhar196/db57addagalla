@@ -3,7 +3,11 @@ extends layout
 block content
   h1= title
     -let result=toShow
-  form(id='serialForm', action="/resource/serials", method="PUT")
+    div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{result._id}
+
+  form(id='serialForm', action="/resource/serials/"+ result._id, method="PUT")
     div.form-group
         label.serialAttr(for='name') Serial Name
         input#name(type='text', name='name', value=result.name)
@@ -15,6 +19,7 @@ block content
         input#season(type='number', name='season' value=result.season)
     input(type="submit")
 
+
   script.
     document.forms['serialForm'].addEventListener('submit', (event) => {
       event.preventDefault();
@@ -25,10 +30,12 @@ block content
       }).then((resp) => {
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
-        alert("Save succeded")
+        alert("Update succeded")
         // TODO handle body
       }).catch((error) => {
         // TODO handle error
-        alert("Save failed " + error )
+        alert("Update failed " + error )
       });
     });
+
+ 

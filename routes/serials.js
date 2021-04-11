@@ -9,5 +9,7 @@ router.get('/detail', serial_controlers.serial_view_one_Page);
 router.get('/create', serial_controlers.serial_create_Page);
 /* GET create update page */
 router.get('/update', serial_controlers.serial_update_Page);
+/* GET create serial page */
+router.get('/delete', serial_controlers.serial_delete_Page);
 
 module.exports = router; 
