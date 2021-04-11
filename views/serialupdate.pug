@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1= title
+    -let result=toShow
+  form(id='serialForm', action="/resource/serials", method="PUT")
+    div.form-group
+        label.serialAttr(for='name') Serial Name
+        input#name(type='text', name='name', value=result.name)
+    div.form-group
+        label.serialAttr(for='author') Serial Author
+        input#author(type='text', name='author' value=result.author)
+    div.form-group
+        label.serialAttr(for='season') Serial Season
+        input#season(type='number', name='season' value=result.season)
+    input(type="submit")
+
+  script.
+    document.forms['serialForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error )
+      });
+    });

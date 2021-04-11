@@ -116,3 +116,17 @@ exports.serial_create_Page =  function(req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+// Handle building the view for updating a serial.
+// query provides the id
+exports.serial_update_Page =  async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+        let result = await serial.findById(req.query.id)
+        res.render('serialupdate', { title: 'serial Update', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
