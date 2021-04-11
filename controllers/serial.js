@@ -51,19 +51,19 @@ exports.serial_update_put = async function (req, res) {
     try {
         let toUpdate = await serial.findById(req.params.id)
         // Do updates of properties
-        if (req.body.name){
+        if (req.body.name) {
             toUpdate.name = req.body.name;
-        } else{
+        } else {
 
         }
-        if (req.body.author){
+        if (req.body.author) {
             toUpdate.author = req.body.author;
-        }else{
+        } else {
 
         }
-        if (req.body.season){
+        if (req.body.season) {
             toUpdate.season = req.body.season;
-        } else{
+        } else {
 
         }
         let result = await toUpdate.save();
@@ -86,5 +86,20 @@ exports.serial_view_all_Page = async function (req, res) {
         });
     } catch (err) {
         res.error(500, `{"error": ${err}}`);
+    }
+};
+
+// Handle a show one view with id specified by query
+exports.serial_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await serial.findById(req.query.id)
+        res.render('serialdetail', {
+            title: 'serial Detail',
+            toShow: result
+        });
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
 };
