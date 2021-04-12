@@ -51,7 +51,7 @@ async function recreateDB() {
 }
 let reseed = true;
 if (reseed) {
-  //recreateDB();
+  recreateDB();
 }
 var app = express();
 

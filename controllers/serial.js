@@ -129,6 +129,18 @@ exports.serial_update_Page =  async function(req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+// Handle serial delete on DELETE.
+exports.serial_delete = async function(req, res) {
+    console.log("delete "  + req.params.id)
+    try {
+        result = await serial.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
+};
 
 // Handle a delete one view with id from query
 exports.serial_delete_Page = async function(req, res) {

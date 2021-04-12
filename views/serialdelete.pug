@@ -7,7 +7,9 @@ block content
   - let serialname = toShow.name
   - let serialauthor = toShow.author
   - let serialseason = toShow.season
-  div
+  - let actionid = "/resource/serials/" + serialid
+  form(id='serialform', action= actionid, method="DELETE")
+    div
     div.row
       div(class='serialAttr mr-3') Serial ID is:
       div #{serialid}
@@ -21,4 +23,22 @@ block content
       div(class='serialAttr mr-3') Serial Season is:
       div #{serialseason}
     div.row
-      button(class='btn btn-sm btn-danger') delete  
+      input(type="submit")
+
+  script.
+    document.forms['serialform'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'DELETE',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("DELETE succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("DELETE failed " + error )
+      });
+    });
