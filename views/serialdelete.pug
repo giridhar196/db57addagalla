@@ -3,42 +3,51 @@ extends layout
 block content
   h1= title
 
-  - let serialid = toShow._id
-  - let serialname = toShow.name
-  - let serialauthor = toShow.author
-  - let serialseason = toShow.season
-  - let actionid = "/resource/serials/" + serialid
-  form(id='serialform', action= actionid, method="DELETE")
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let serialid = toShow._id
+    - let name = toShow.name
+    - let serialauthor = toShow.author
+    - let serialseason = toShow.season
+    - let actionid = "/resource/serials/" + serialid
+    script let actionid = "#{actionid}"
     div
-    div.row
-      div(class='serialAttr mr-3') Serial ID is:
-      div #{serialid}
-    div.row
-      div(class='serialAttr mr-3') Serial Name is:
-      div #{serialname}
-    div.row
-      div(class='serialAttr mr-3') Serial Author is:
-      div #{serialauthor}
-    div.row
-      div(class='serialAttr mr-3') Serial Season is:
-      div #{serialseason}
-    div.row
-      input(type="submit")
+      div.row
+        div(class='serialAttr mr-3') serial ID is:
+        div #{serialid}
+      div.row
+        div(class='serialAttr mr-3') serial Name is:
+        div #{name}
+      div.row
+        div(class='serialAttr mr-3') serial season is:
+        div #{serialseason}
+      div.row
+        div(class='serialAttr mr-3') serial author is:
+        div #{serialauthor}
+
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
 
   script.
-    document.forms['serialform'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'DELETE',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    function cancel() {
+      // Go back to the home page for the serial collection
+      window.location.href='/serials'
+    }
+  script.
+    function deleteOnid() {
+      console.log("starting delete")
+      // delete first
+      fetch(actionid, {
+        method: 'DELETE'      // Don't need a body for the delete
       }).then((resp) => {
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
-        alert("DELETE succeded")
+        alert("Delete succeded")
+        window.location.href='/serials'
         // TODO handle body
       }).catch((error) => {
         // TODO handle error
-        alert("DELETE failed " + error )
+        alert("Delete failed " + error )
       });
-    });
+    }
