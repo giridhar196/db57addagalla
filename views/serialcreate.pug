@@ -1,20 +1,23 @@
 extends layout
 
 block content
-  h1= title
-
-  form(id='serialForm', action="/resource/serials", method="POST")
-    div.form-group
-        label.serialAttr(for='name') Serial Name
-        input#name(type='text', name='name')
-    div.form-group
-        label.serialAttr(for='author') Serial Author
-        input#author(type='text', name='author')
-    div.form-group
-        label.serialAttr(for='season') Serial Season
-        input#season(type='number', name='season')
-    input(type="submit")
-
+  div(class="container")
+    div(class="col-md-12")
+      div(class="col-md-6 col-sm-8 col-xs-4")
+        h2(class="text-primary")= title
+      div(class="col-md-4")
+        form(id='serialForm', action="/resource/serials", method="POST")
+          div.form-group
+              label(for='name') Serial Name: 
+              input#name(type='text', name='name',class="form-control form-control-sm")
+          div.form-group
+              label(for='author') Serial Author: 
+              input#author(type='text', name='author',class="form-control form-control-sm")
+          div.form-group
+              label(for='season') Serial Season: 
+              input#season(type='number', name='season',class="form-control form-control-sm")
+          input(type="submit" class="btn btn-primary btn-sm")
+      div(class="col-md-4")
   script.
     document.forms['serialForm'].addEventListener('submit', (event) => {
       event.preventDefault();

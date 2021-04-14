@@ -109,7 +109,7 @@ exports.serial_view_one_Page = async function (req, res) {
 exports.serial_create_Page =  function(req, res) {
     console.log("create view")
     try{
-        res.render('serialcreate', { title: 'Serial Create'});
+        res.render('serialcreate', { title: 'Create Serial'});
     }
     catch(err){
         res.status(500)
@@ -122,7 +122,7 @@ exports.serial_update_Page =  async function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
         let result = await serial.findById(req.query.id)
-        res.render('serialupdate', { title: 'serial Update', toShow: result });
+        res.render('serialupdate', { title: 'Update Serial Details', toShow: result });
     }
     catch(err){
         res.status(500)
