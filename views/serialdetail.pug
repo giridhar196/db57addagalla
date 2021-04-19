@@ -2,21 +2,23 @@ extends layout
 
 block content
   h1= title
-
-  - let serialid = toShow._id
-  - let serialname = toShow.name
-  - let serialauthor = toShow.author
-  - let serialseason = toShow.season
-  div
-    div.row
-      div(class='serialAttr mr-3') Serial ID is:
-      div #{serialid}
-    div.row
-      div(class='serialAttr mr-3') Serial Name is:
-      div #{serialname}
-    div.row
-      div(class='serialAttr mr-3') Serial Author is:
-      div #{serialauthor}
-    div.row
-      div(class='serialAttr mr-3') Serial Season is:
-      div #{serialseason}
+  if(toshow == null)
+    h2 no instance
+  else
+    - let serialid = toShow._id
+    - let serialname = toShow.name
+    - let serialauthor = toShow.author
+    - let serialseason = toShow.season
+    div
+      div.row
+        div(class='serialAttr mr-3') Serial ID is:
+        div #{serialid}
+      div.row
+        div(class='serialAttr mr-3') Serial Name is:
+        div #{serialname}
+      div.row
+        div(class='serialAttr mr-3') Serial Author is:
+        div #{serialauthor}
+      div.row
+        div(class='serialAttr mr-3') Serial Season is:
+        div #{serialseason}
