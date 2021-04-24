@@ -20,18 +20,23 @@ block content
       div(class="col-md-4")
   script.
     document.forms['serialForm'].addEventListener('submit', (event) => {
-      event.preventDefault();
-      // TODO do something here to show user that form is being submitted
-      fetch(event.target.action, {
-        method: 'POST',
-        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-      }).then((resp) => {
-        return resp.json(); // or resp.text() or whatever the server sends
-      }).then((body) => {
-        alert("Save succeded")
-        // TODO handle body
-      }).catch((error) => {
-        // TODO handle error
-        alert("Save failed " + error )
-      });
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          document.getElementById("errors").style.display = "block"
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          if (body.name) {
+            document.getElementById("errors").innerHTML = `${body.name}  \n ${body.message}\n`;
+            alert("Save Failed")
+          } else {
+            alert("Save succeded")
+          }
+        }).catch((error) => {
+          // TODO handle error
+          alert("Save failed " + error)
+        });
     });
